@@ -8,3 +8,7 @@
  */
 
 rootProject.name = "dc2f-meta"
+
+include("dc2f")
+include("dc2f-edit-api")
+include("dc2f-common")

@@ -4,3 +4,39 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds
  */
+
+val dc2fVersion = "0.2.0"
+
+subprojects {
+    version = dc2fVersion
+}
+
+project(":dc2f-edit-api") {
+    version = dc2fVersion
+}
+
+configure(subprojects) {
+//    apply(plugin = "kotlin")
+    println("testing $name ($version)")
+    configurations.all {
+
+        resolutionStrategy.dependencySubstitution {
+            substitute(module("com.dc2f:dc2f")).apply {
+                with(project(":dc2f"))
+                because("we work with the unreleased development version")
+            }
+            substitute(module("com.dc2f:dc2f-edit-api")).apply {
+                with(project(":dc2f-edit-api"))
+                because("we work with the unreleased development version")
+            }
+        }
+//        resolutionStrategy.dependencySubstitution.all {
+//            requested.let {
+//                if (it is ModuleComponentSelector && it.group == "com.dc2f") {
+//                    println("substitude $it with ($dc2fVersion)")
+//                    useTarget(mapOf("version" to dc2fVersion))
+//                }
+//            }
+//        }
+    }
+}
