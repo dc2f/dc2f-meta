@@ -5,14 +5,32 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds
  */
 
-val dc2fVersion = "0.2.0"
+val dc2fVersion = "0.2.0-SNAPSHOT"
 
 subprojects {
     version = dc2fVersion
 }
 
-project(":dc2f-edit-api") {
-    version = dc2fVersion
+//project(":dc2f-edit-api") {
+//    apply(plugin = "maven-publish")
+//}
+
+val secretConfig = file("dc2f/_tools/secrets/build_secrets.gradle.kts")
+if (secretConfig.exists()) {
+    apply { from(secretConfig) }
+    allprojects {
+        extra["signing.secretKeyRingFile"] = "../dc2f/" + extra["signing.secretKeyRingFile"]
+    }
+} else {
+    println("Warning: Secrets do not exist, maven publish will not be possible.")
+}
+
+tasks {
+    register("myPublish") {
+        subprojects.forEach {
+            dependsOn("${it.name}:publish")
+        }
+    }
 }
 
 configure(subprojects) {
