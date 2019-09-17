@@ -26,7 +26,7 @@ if (secretConfig.exists()) {
 }
 
 tasks {
-    register("myPublish") {
+    register("publishAll") {
         subprojects.forEach {
             dependsOn("${it.name}:publish")
         }
