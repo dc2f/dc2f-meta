@@ -1,0 +1,9 @@
+[submodule "dc2f"]
+	path = dc2f
+	url = ../dc2f.kt
+[submodule "dc2f-edit-api"]
+	path = dc2f-edit-api
+	url = ../dc2f-edit-api
+[submodule "dc2f-common"]
+	path = dc2f-common
+	url = ../dc2f-common
