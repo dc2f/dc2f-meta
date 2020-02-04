@@ -5,7 +5,7 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds
  */
 
-val dc2fVersion = "0.2.3-SNAPSHOT"
+val dc2fVersion = "0.2.4-SNAPSHOT"
 
 subprojects {
     version = dc2fVersion
